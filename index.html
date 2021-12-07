@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    .calculadora {
+        background: cyan;
+        width: fit-content;
+        padding: 15px;
+        padding-top: 0;
+        border: #1f00e3 2px solid;
+        border-radius: 15px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    h1 {
+		color: #1f00e3;
+        text-align: center;
+	}
+    #tela {
+        background: black;
+        color: white;
+        height: 30px;
+        text-align: right;
+        padding-top: 15px;
+    }
+    .erro {
+        background: red !important;
+        color: yellow !important;
+    }
+    button {
+		min-width: 25px;
+        color: cyan;
+        border: none;
+        margin: 2px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background: #1f00e3;
+	}
+</style>
+
+<body>
+<div class="calculadora">
+    <h1>Calculadora</h1>
+    <p id="tela"> Tela </p>
+
+    <button onclick="inserir(this)">7</button>
+    <button onclick="inserir(this)">8</button>
+    <button onclick="inserir(this)">9</button>
+    <button onclick="inserir(this)">+</button>
+    <br>
+    <button onclick="inserir(this)">4</button>
+    <button onclick="inserir(this)">5</button>
+    <button onclick="inserir(this)">6</button>
+    <button onclick="inserir(this)">-</button>
+    <br>
+    <button onclick="inserir(this)">1</button>
+    <button onclick="inserir(this)">2</button>
+    <button onclick="inserir(this)">3</button>
+    <button onclick="inserir(this)">*</button>
+    <br>
+    <button onclick="inserir(this)">0</button>
+    <button onclick="inserir(this)">.</button>
+    <button onclick="inserir(this)">/</button>
+    <button onclick="calcular()">=</button>
+    <br>
+    <br>
+    <button onclick="inserir(this)">(</button>
+    <button onclick="inserir(this)">)</button>
+    <button onclick="inserir({innerHTML: ' '})">Espaço</button> 
+    <br>
+    <br>
+    <button onclick="apagarUltimo()">Apagar umtimo digito</button>
+    <br>
+    <button onclick="apagarTudo()">Limpar</button>
+</div>
+</body>
+
+<script>
+    var tela = document.getElementById("tela");
+    var valTela = "";
+    var mudarTela = () => {
+        tela.innerHTML = valTela;
+        tela.className = ""
+    }
+
+    var inserir = elemento => {
+        valTela = valTela + elemento.innerHTML
+        mudarTela()
+    }
+
+    var apagarUltimo = () => {
+        valTela = valTela.slice(0, valTela.length - 1)
+        mudarTela();
+    }
+
+    var apagarTudo = () => {
+        valTela = ""
+        mudarTela();
+    }
+
+    var calcular = () => {
+        try {
+            valTela = eval(valTela)
+            mudarTela()
+        } catch {
+            tela.innerHTML = "ERRO!"
+            tela.className = "erro"
+        }
+    }
+
+
+</script>
+
+</html>
